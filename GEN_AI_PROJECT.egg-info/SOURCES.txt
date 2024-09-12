@@ -1,6 +1,3 @@
-README.md
-setup.py
-GEN_AI_PROJECT.egg-info/PKG-INFO
-GEN_AI_PROJECT.egg-info/SOURCES.txt
-GEN_AI_PROJECT.egg-info/dependency_links.txt
-GEN_AI_PROJECT.egg-info/top_level.txt
+version https://git-lfs.github.com/spec/v1
+oid sha256:f54b1e30d8f5076d30fe28d025ab78527eafcbf5719e0bcb03468fb88e18bc90
+size 170
