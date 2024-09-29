@@ -61,10 +61,6 @@ SOFTWARE.
 #pragma clang diagnostic ignored "-Wpadded"
 #endif
 
-#if defined(MAC_OSX_TK)
-#   define Region XRegion
-#endif
-
 /*
  * Bitmask returned by XParseGeometry().  Each bit tells if the corresponding
  * value (x, y, width, height) was found in the parsed string.
@@ -241,35 +237,35 @@ typedef struct _XComposeStatus {
  * Keysym macros, used on Keysyms to test for classes of symbols
  */
 #define IsKeypadKey(keysym) \
-  (((unsigned)(keysym) >= XK_KP_Space) && ((unsigned)(keysym) <= XK_KP_Equal))
+  (((KeySym)(keysym) >= XK_KP_Space) && ((KeySym)(keysym) <= XK_KP_Equal))
 
 #define IsPrivateKeypadKey(keysym) \
-  (((unsigned)(keysym) >= 0x11000000) && ((unsigned)(keysym) <= 0x1100FFFF))
+  (((KeySym)(keysym) >= 0x11000000) && ((KeySym)(keysym) <= 0x1100FFFF))
 
 #define IsCursorKey(keysym) \
-  (((unsigned)(keysym) >= XK_Home)     && ((unsigned)(keysym) <  XK_Select))
+  (((KeySym)(keysym) >= XK_Home)     && ((KeySym)(keysym) <  XK_Select))
 
 #define IsPFKey(keysym) \
-  (((unsigned)(keysym) >= XK_KP_F1)     && ((unsigned)(keysym) <= XK_KP_F4))
+  (((KeySym)(keysym) >= XK_KP_F1)     && ((KeySym)(keysym) <= XK_KP_F4))
 
 #define IsFunctionKey(keysym) \
-  (((unsigned)(keysym) >= XK_F1)       && ((unsigned)(keysym) <= XK_F35))
+  (((KeySym)(keysym) >= XK_F1)       && ((KeySym)(keysym) <= XK_F35))
 
 #define IsMiscFunctionKey(keysym) \
-  (((unsigned)(keysym) >= XK_Select)   && ((unsigned)(keysym) <= XK_Break))
+  (((KeySym)(keysym) >= XK_Select)   && ((KeySym)(keysym) <= XK_Break))
 
 #ifdef XK_XKB_KEYS
 #define IsModifierKey(keysym) \
-  ((((unsigned)(keysym) >= XK_Shift_L) && ((unsigned)(keysym) <= XK_Hyper_R)) \
-   || (((unsigned)(keysym) >= XK_ISO_Lock) && \
-       ((unsigned)(keysym) <= XK_ISO_Level5_Lock)) \
-   || ((unsigned)(keysym) == XK_Mode_switch) \
-   || ((unsigned)(keysym) == XK_Num_Lock))
+  ((((KeySym)(keysym) >= XK_Shift_L) && ((KeySym)(keysym) <= XK_Hyper_R)) \
+   || (((KeySym)(keysym) >= XK_ISO_Lock) && \
+       ((KeySym)(keysym) <= XK_ISO_Level5_Lock)) \
+   || ((KeySym)(keysym) == XK_Mode_switch) \
+   || ((KeySym)(keysym) == XK_Num_Lock))
 #else
 #define IsModifierKey(keysym) \
-  ((((unsigned)(keysym) >= XK_Shift_L) && ((unsigned)(keysym) <= XK_Hyper_R)) \
-   || ((unsigned)(keysym) == XK_Mode_switch) \
-   || ((unsigned)(keysym) == XK_Num_Lock))
+  ((((KeySym)(keysym) >= XK_Shift_L) && ((KeySym)(keysym) <= XK_Hyper_R)) \
+   || ((KeySym)(keysym) == XK_Mode_switch) \
+   || ((KeySym)(keysym) == XK_Num_Lock))
 #endif
 /*
  * opaque reference to Region data type
@@ -472,6 +468,13 @@ extern Status XGetTextProperty(
     Atom		/* property */
 );
 
+extern XVisualInfo *XGetVisualInfo(
+    Display*		/* display */,
+    long		/* vinfo_mask */,
+    XVisualInfo*	/* vinfo_template */,
+    int*		/* nitems_return */
+);
+
 extern Status XGetWMClientMachine(
     Display*		/* display */,
     Window		/* w */,
@@ -629,6 +632,12 @@ extern void XSetTextProperty(
     Atom		/* property */
 );
 
+extern void XSetWMClientMachine(
+    Display*		/* display */,
+    Window		/* w */,
+    XTextProperty*	/* text_prop */
+);
+
 extern int XSetWMHints(
     Display*		/* display */,
     Window		/* w */,
@@ -719,6 +728,12 @@ extern int XShrinkRegion(
     Region		/* r */,
     int			/* dx */,
     int			/* dy */
+);
+
+extern Status XStringListToTextProperty(
+    char**		/* list */,
+    int			/* count */,
+    XTextProperty*	/* text_prop_return */
 );
 
 extern int XSubtractRegion(
@@ -819,9 +834,5 @@ extern int XXorRegion(
 #endif
 
 _XFUNCPROTOEND
-
-#if defined(MAC_OSX_TK)
-#   undef Region
-#endif
 
 #endif /* _X11_XUTIL_H_ */

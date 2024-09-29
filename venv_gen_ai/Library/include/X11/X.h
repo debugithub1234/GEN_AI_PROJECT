@@ -53,11 +53,6 @@ SOFTWARE.
 #define X_PROTOCOL	11		/* current protocol version */
 #define X_PROTOCOL_REVISION 0		/* current minor version */
 
-#if defined(MAC_OSX_TK)
-#   define Cursor XCursor
-#   define Region XRegion
-#endif
-
 /* Resources */
 
 /*
@@ -68,11 +63,7 @@ SOFTWARE.
 #ifndef _XSERVER64
 #  ifndef _XTYPEDEF_XID
 #    define _XTYPEDEF_XID
-#    ifdef _WIN64
-typedef unsigned __int64 XID;
-#    else
 typedef unsigned long XID;
-#    endif
 #  endif
 #  ifndef _XTYPEDEF_MASK
 #    define _XTYPEDEF_MASK
@@ -114,21 +105,14 @@ typedef XID Colormap;
 typedef XID GContext;
 typedef XID KeySym;
 
-typedef unsigned long KeyCode;	/* In order to use IME, the Macintosh needs
-				 * to pack 3 bytes into the keyCode field in
-				 * the XEvent.  In the real X.h, a KeyCode is
-				 * defined as a short, which wouldn't be big
-				 * enough. */
+typedef unsigned char KeyCode;
 
 /*****************************************************************
  * RESERVED RESOURCE AND CONSTANT DEFINITIONS
  *****************************************************************/
 
-#ifndef _WIN32
-#   define None              0L      /* See bug [9e31fd9449] and below */
-#else
-/* Pert-Tk expects None to be a macro. See ticket [593eb0227c] */
-#   define None              None    /* uses the enum below */
+#ifndef None
+#define None                 0L	/* universal null resource or null atom */
 #endif
 
 #define ParentRelative       1L	/* background pixmap in CreateWindow
@@ -227,7 +211,8 @@ are reserved in the protocol for errors and replies. */
 #define ColormapNotify		32
 #define ClientMessage		33
 #define MappingNotify		34
-#define LASTEvent		35	/* must be bigger than any event # */
+#define GenericEvent		35
+#define LASTEvent		36	/* must be bigger than any event # */
 
 
 /* Key masks. Used as modifiers to GrabButton and GrabKey, results of QueryPointer,
@@ -235,22 +220,12 @@ are reserved in the protocol for errors and replies. */
 
 #define ShiftMask		(1<<0)
 #define LockMask		(1<<1)
-#ifndef _WIN32
-#   define ControlMask		(1<<2) /* See bug [9e31fd9449] and below */
-#else
-/* Pert-Tk expects ControlMask to be a macro. See ticket [593eb0227c] */
-#   define ControlMask		ControlMask /* uses the enum below */
-#endif
+#define ControlMask		(1<<2)
 #define Mod1Mask		(1<<3)
 #define Mod2Mask		(1<<4)
 #define Mod3Mask		(1<<5)
 #define Mod4Mask		(1<<6)
 #define Mod5Mask		(1<<7)
-
-/* See bug [9e31fd9449], this way prevents conflicts with Win32 headers */
-#ifdef _WIN32
-enum { None = 0, ControlMask = (1<<2) };
-#endif
 
 /* modifier names.  Used to build a SetModifierMapping request or
    to read a GetModifierMapping request.  These correspond to the
@@ -738,10 +713,5 @@ enum { None = 0, ControlMask = (1<<2) };
 
 #define LSBFirst		0
 #define MSBFirst		1
-
-#if defined(MAC_OSX_TK)
-#   undef Cursor
-#   undef Region
-#endif
 
 #endif /* X_H */

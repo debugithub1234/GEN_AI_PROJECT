@@ -1,0 +1,8 @@
+prefix=c:/All_Program/F_DRIVE/DATA_SCIENCE/AI_AND_MACHINE_LEARNING/GUIDED_PROJECT/GEN_AI_1/GEN_AI_PROJECT/venv_gen_ai/Library
+includedir=${prefix}/include
+
+Name: FixesProto
+Description: X Fixes extension headers
+Version: 6.1
+Cflags: -I${includedir}
+Requires: xextproto >= 7.0.99.1

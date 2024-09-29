@@ -1,0 +1,12 @@
+prefix=c:/All_Program/F_DRIVE/DATA_SCIENCE/AI_AND_MACHINE_LEARNING/GUIDED_PROJECT/GEN_AI_1/GEN_AI_PROJECT/venv_gen_ai/Library
+exec_prefix=c:/All_Program/F_DRIVE/DATA_SCIENCE/AI_AND_MACHINE_LEARNING/GUIDED_PROJECT/GEN_AI_1/GEN_AI_PROJECT/venv_gen_ai/Library
+libdir=c:/All_Program/F_DRIVE/DATA_SCIENCE/AI_AND_MACHINE_LEARNING/GUIDED_PROJECT/GEN_AI_1/GEN_AI_PROJECT/venv_gen_ai/Library/lib
+includedir=c:/All_Program/F_DRIVE/DATA_SCIENCE/AI_AND_MACHINE_LEARNING/GUIDED_PROJECT/GEN_AI_1/GEN_AI_PROJECT/venv_gen_ai/Library/include
+
+Name: libzmq
+Description: 0MQ c++ library
+Version: 4.3.5
+Libs: -L${libdir} -lzmq
+Libs.private: -lstdc++ 
+Requires.private: 
+Cflags: -I${includedir} 

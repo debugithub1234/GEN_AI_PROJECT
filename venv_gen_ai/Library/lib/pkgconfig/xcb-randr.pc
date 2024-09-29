@@ -1,0 +1,11 @@
+prefix=c:/All_Program/F_DRIVE/DATA_SCIENCE/AI_AND_MACHINE_LEARNING/GUIDED_PROJECT/GEN_AI_1/GEN_AI_PROJECT/venv_gen_ai/Library
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: XCB RandR
+Description: XCB RandR Extension
+Version: 1.17.0
+Requires.private: xcb xcb-render
+Libs: -L${libdir} -lxcb-randr
+Cflags: -I${includedir}

@@ -1,0 +1,11 @@
+prefix=c:/All_Program/F_DRIVE/DATA_SCIENCE/AI_AND_MACHINE_LEARNING/GUIDED_PROJECT/GEN_AI_1/GEN_AI_PROJECT/venv_gen_ai/Library
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Xau
+Description: X authorization file management library
+Version: 1.0.11
+Requires: xproto
+Cflags: -I${includedir}
+Libs: -L${libdir} -lXau

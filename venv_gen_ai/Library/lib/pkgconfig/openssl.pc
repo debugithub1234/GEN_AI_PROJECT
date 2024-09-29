@@ -1,0 +1,9 @@
+prefix=c:/All_Program/F_DRIVE/DATA_SCIENCE/AI_AND_MACHINE_LEARNING/GUIDED_PROJECT/GEN_AI_1/GEN_AI_PROJECT/venv_gen_ai/Library 
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: OpenSSL
+Description: Secure Sockets Layer and cryptography libraries and tools
+Requires: libssl libcrypto
+Version: 3.3.2 
